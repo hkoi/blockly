@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/nodejs
 
 'use strict';
 
@@ -29,7 +29,7 @@ var code = Blockly.JavaScript.workspaceToCode(workspace);
 
 var prepend = "var HKOIInput = {}; HKOIInput.buf = new Buffer(1024); HKOIInput.br = 0; HKOIInput.str = '';\n";
 prepend += "while (true) {\n  HKOIInput.br = require('fs').readSync(process.stdin.fd, HKOIInput.buf, 0, 1024);\n";
-prepend += "  if (HKOIInput.br == 0) break;\n  HKOIInput.str += HKOIInput.buf.toString(null, 0, HKOIInput.br);}\n";
+prepend += "  if (HKOIInput.br == 0) break;\n  HKOIInput.str += HKOIInput.buf.toString(null, 0, HKOIInput.br);\n}\n";
 prepend += "HKOIInput.lines = HKOIInput.str.split('\\n');\n";
 prepend += "var window = { 'alert': function(x) { console.log(x); }, 'prompt': function(x) { return HKOIInput.lines.shift(); } };\n\n";
 code = prepend + code;
