@@ -181,81 +181,85 @@ Blockly.JavaScript['lists_getIndex'] = function(block) {
 };
 
 Blockly.JavaScript['lists_setIndex'] = function(block) {
-  // Set element at index.
-  // Note: Until February 2013 this block did not have MODE or WHERE inputs.
   var list = Blockly.JavaScript.valueToCode(block, 'LIST',
-      Blockly.JavaScript.ORDER_MEMBER) || '[]';
-  var mode = block.getFieldValue('MODE') || 'GET';
-  var where = block.getFieldValue('WHERE') || 'FROM_START';
-  var at = Blockly.JavaScript.valueToCode(block, 'AT',
-      Blockly.JavaScript.ORDER_NONE) || '1';
-  var value = Blockly.JavaScript.valueToCode(block, 'TO',
-      Blockly.JavaScript.ORDER_ASSIGNMENT) || 'null';
-  // Cache non-trivial values to variables to prevent repeated look-ups.
-  // Closure, which accesses and modifies 'list'.
-  function cacheList() {
-    if (list.match(/^\w+$/)) {
-      return '';
+        Blockly.JavaScript.ORDER_MEMBER) || '[]';
+  var codeFunc = function() {
+    // Set element at index.
+    // Note: Until February 2013 this block did not have MODE or WHERE inputs.
+    
+    var mode = block.getFieldValue('MODE') || 'GET';
+    var where = block.getFieldValue('WHERE') || 'FROM_START';
+    var at = Blockly.JavaScript.valueToCode(block, 'AT',
+        Blockly.JavaScript.ORDER_NONE) || '1';
+    var value = Blockly.JavaScript.valueToCode(block, 'TO',
+        Blockly.JavaScript.ORDER_ASSIGNMENT) || 'null';
+    // Cache non-trivial values to variables to prevent repeated look-ups.
+    // Closure, which accesses and modifies 'list'.
+    function cacheList() {
+      if (list.match(/^\w+$/)) {
+        return '';
+      }
+      var listVar = Blockly.JavaScript.variableDB_.getDistinctName(
+          'tmp_list', Blockly.Variables.NAME_TYPE);
+      var code = 'var ' + listVar + ' = ' + list + ';\n';
+      list = listVar;
+      return code;
     }
-    var listVar = Blockly.JavaScript.variableDB_.getDistinctName(
-        'tmp_list', Blockly.Variables.NAME_TYPE);
-    var code = 'var ' + listVar + ' = ' + list + ';\n';
-    list = listVar;
-    return code;
-  }
-  if (where == 'FIRST') {
-    if (mode == 'SET') {
-      return list + '[0] = ' + value + ';\n';
-    } else if (mode == 'INSERT') {
-      return list + '.unshift(' + value + ');\n';
-    }
-  } else if (where == 'LAST') {
-    if (mode == 'SET') {
+    if (where == 'FIRST') {
+      if (mode == 'SET') {
+        return list + '[0] = ' + value + ';\n';
+      } else if (mode == 'INSERT') {
+        return list + '.unshift(' + value + ');\n';
+      }
+    } else if (where == 'LAST') {
+      if (mode == 'SET') {
+        var code = cacheList();
+        code += list + '[' + list + '.length - 1] = ' + value + ';\n';
+        return code;
+      } else if (mode == 'INSERT') {
+        return list + '.push(' + value + ');\n';
+      }
+    } else if (where == 'FROM_START') {
+      // Blockly uses one-based indicies.
+      if (Blockly.isNumber(at)) {
+        // If the index is a naked number, decrement it right now.
+        at = parseFloat(at) - 1;
+      } else {
+        // If the index is dynamic, decrement it in code.
+        at += ' - 1';
+      }
+      if (mode == 'SET') {
+        return list + '[' + at + '] = ' + value + ';\n';
+      } else if (mode == 'INSERT') {
+        return list + '.splice(' + at + ', 0, ' + value + ');\n';
+      }
+    } else if (where == 'FROM_END') {
       var code = cacheList();
-      code += list + '[' + list + '.length - 1] = ' + value + ';\n';
-      return code;
-    } else if (mode == 'INSERT') {
-      return list + '.push(' + value + ');\n';
+      if (mode == 'SET') {
+        code += list + '[' + list + '.length - ' + at + '] = ' + value + ';\n';
+        return code;
+      } else if (mode == 'INSERT') {
+        code += list + '.splice(' + list + '.length - ' + at + ', 0, ' + value +
+            ');\n';
+        return code;
+      }
+    } else if (where == 'RANDOM') {
+      var code = cacheList();
+      var xVar = Blockly.JavaScript.variableDB_.getDistinctName(
+          'tmp_x', Blockly.Variables.NAME_TYPE);
+      code += 'var ' + xVar + ' = Math.floor(Math.random() * ' + list +
+          '.length);\n';
+      if (mode == 'SET') {
+        code += list + '[' + xVar + '] = ' + value + ';\n';
+        return code;
+      } else if (mode == 'INSERT') {
+        code += list + '.splice(' + xVar + ', 0, ' + value + ');\n';
+        return code;
+      }
     }
-  } else if (where == 'FROM_START') {
-    // Blockly uses one-based indicies.
-    if (Blockly.isNumber(at)) {
-      // If the index is a naked number, decrement it right now.
-      at = parseFloat(at) - 1;
-    } else {
-      // If the index is dynamic, decrement it in code.
-      at += ' - 1';
-    }
-    if (mode == 'SET') {
-      return list + '[' + at + '] = ' + value + ';\n';
-    } else if (mode == 'INSERT') {
-      return list + '.splice(' + at + ', 0, ' + value + ');\n';
-    }
-  } else if (where == 'FROM_END') {
-    var code = cacheList();
-    if (mode == 'SET') {
-      code += list + '[' + list + '.length - ' + at + '] = ' + value + ';\n';
-      return code;
-    } else if (mode == 'INSERT') {
-      code += list + '.splice(' + list + '.length - ' + at + ', 0, ' + value +
-          ');\n';
-      return code;
-    }
-  } else if (where == 'RANDOM') {
-    var code = cacheList();
-    var xVar = Blockly.JavaScript.variableDB_.getDistinctName(
-        'tmp_x', Blockly.Variables.NAME_TYPE);
-    code += 'var ' + xVar + ' = Math.floor(Math.random() * ' + list +
-        '.length);\n';
-    if (mode == 'SET') {
-      code += list + '[' + xVar + '] = ' + value + ';\n';
-      return code;
-    } else if (mode == 'INSERT') {
-      code += list + '.splice(' + xVar + ', 0, ' + value + ');\n';
-      return code;
-    }
-  }
-  throw 'Unhandled combination (lists_setIndex).';
+    throw 'Unhandled combination (lists_setIndex).';
+  };
+  return codeFunc() + 'updateVar(\'' + list + '\');\n';
 };
 
 Blockly.JavaScript['lists_getSublist'] = function(block) {
