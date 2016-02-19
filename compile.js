@@ -1,8 +1,6 @@
-'use strict';
+#!/usr/bin/env node
 
-var jsdom = require("jsdom").jsdom;
-global.document = jsdom("", []);
-global.window = document.defaultView;
+'use strict';
 
 global.DOMParser = require('xmldom').DOMParser; 
 require('../closure-library/closure/goog/bootstrap/nodejs')
@@ -11,27 +9,28 @@ require('./blocks_compressed.js');
 require('./javascript_compressed.js');
 require('./msg/js/en.js');
 
-var xmlText = '<xml xmlns="http://www.w3.org/1999/xhtml">' +
-        '<block type="variables_set">' +
-            '<field name="VAR">blockly</field>' +
-            '<value name="VALUE">' +
-                '<block type="text">' +
-                    '<field name="TEXT">Hello world!</field>' +
-                '</block>' +
-            '</value>' +
-        '</block>' +
-    '</xml>';
+Blockly.Events.Create = function() { this.isNull=function(){return 1}; };
+
+var fname = process.argv[0] == 'blockly' ? process.argv[1] : process.argv[2];
+var fs = require('fs');
+var xmlText = fs.readFileSync(fname, 'utf8');
 
 try {
     var xml = Blockly.Xml.textToDom(xmlText);
 }
 catch (e) {
     console.log(e);
-    return ''
+    process.exit(2);
 }
 
 var workspace = new Blockly.Workspace();
 Blockly.Xml.domToWorkspace(workspace, xml);
 var code = Blockly.JavaScript.workspaceToCode(workspace);
 
-console.log(code)  
+var prepend = "var HKOIInput = {}; HKOIInput.buf = new Buffer(1024); HKOIInput.br = 0; HKOIInput.str = '';\n";
+prepend += "while (true) {\n  HKOIInput.br = require('fs').readSync(process.stdin.fd, HKOIInput.buf, 0, 1024);\n";
+prepend += "  if (HKOIInput.br == 0) break;\n  HKOIInput.str += HKOIInput.buf.toString(null, 0, HKOIInput.br);}\n";
+prepend += "HKOIInput.lines = HKOIInput.str.split('\\n');\n";
+prepend += "var window = { 'alert': function(x) { console.log(x); }, 'prompt': function(x) { return HKOIInput.lines.shift(); } };\n\n";
+code = prepend + code;
+fs.writeFileSync('program.exe', code);
