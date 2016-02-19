@@ -33,8 +33,14 @@ Blockly.JavaScript['hkoi_endl'] = function(block) {
   return ['\'\\n\'', Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript['hkoi_println'] = function(block) {
-  var argument0 = Blockly.JavaScript.valueToCode(block, 'TEXT',
-      Blockly.JavaScript.ORDER_NONE) || '\'\'';
-  return 'window.alert(' + argument0 + ' + \'\\n\');\n';
+Blockly.JavaScript['hkoi_readvars'] = function(block) {
+  var numvars = block.getFieldValue('numvars');
+  var temp = Blockly.JavaScript.variableDB_.getDistinctName('temp_list', Blockly.Variables.NAME_TYPE);
+
+  var code = 'var ' + temp + ' = window.prompt().match(/(\\S+)/g);\n';
+  for (var i = 1; i <= numvars; i++) {
+    code += Blockly.JavaScript.variableDB_.getName(block.getFieldValue('variable' + i), Blockly.Variables.NAME_TYPE) +
+      ' = isNaN(parseFloat(' + temp + '[' + (i - 1) + '])) ? ' + temp + '[' + (i - 1) + '] : parseFloat(' + temp + '[' + (i - 1) + ']);\n';
+  }
+  return code;
 };

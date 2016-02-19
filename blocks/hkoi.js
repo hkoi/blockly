@@ -40,26 +40,79 @@ Blockly.Blocks['hkoi_endl'] = {
   }
 };
 
-
-Blockly.Blocks['hkoi_println'] = {
+Blockly.Blocks['hkoi_readvars'] = {
+  init: function() {
+    var OPTIONS =
+        [['1', '1'],
+         ['2', '2'],
+         ['3', '3'],
+         ['4', '4'],
+         ['5', '5'],
+         ['6', '6'],
+         ['7', '7'],
+         ['8', '8']];
+    this.setColour(330);
+    var dropdown = new Blockly.FieldDropdown(OPTIONS, function(option) {
+      this.sourceBlock_.updateShape_(option);
+    });
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.HKOI_READVARS_INPUT)
+        .appendField(dropdown, 'numvars')
+        .appendField(Blockly.Msg.HKOI_READVARS_VARS);
+    this.appendDummyInput("var1")
+        .appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME + '1'), "variable1");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setInputsInline(true);
+  },
   /**
-   * Block for print statement.
+   * Create XML to store numvars
+   * @return {Element} XML storage element.
    * @this Blockly.Block
    */
-  init: function() {
-    this.jsonInit({
-      "message0": Blockly.Msg.HKOI_PRINTLN_TITLE,
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "TEXT"
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    var numVars = this.getFieldValue('numvars');
+    container.setAttribute('numvars', numVars);
+    return container;
+  },
+  /**
+   * Parse XML to restore the variable inputs
+   * @param {!Element} xmlElement XML storage element.
+   * @this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    var numVars = xmlElement.getAttribute('numvars');
+    this.updateShape_(numVars);
+  },
+  /**
+   * Modify this block to have numvars inputs
+   * @param {boolean} numVars True if this block has a divisor input.
+   * @private
+   * @this Blockly.Block
+   */
+  updateShape_: function(numVars) {
+    // Add or remove a Dummy Input.
+    for (var i = 2; i <= 8; i++) {
+      var inputExists = this.getInput('var' + i);
+      if (numVars >= i) {
+        if (!inputExists) {
+          this.appendDummyInput('var' + i)
+              .appendField(',')
+              .appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME + i), "variable" + i);
         }
-      ],
-      "previousStatement": null,
-      "nextStatement": null,
-      "colour": 160,
-      "tooltip": Blockly.Msg.TEXT_PRINT_TOOLTIP,
-      "helpUrl": Blockly.Msg.TEXT_PRINT_HELPURL
-    });
+      } else if (inputExists) {
+        this.removeInput('var' + i);
+      }
+    }
+  },
+
+  getVars: function() {
+    var numVars = this.getFieldValue('numvars');
+    var list = [];
+    for (var i = 1; i <= numVars; i++) {
+      list.push(this.getFieldValue('variable' + i));
+    }
+    return list;
   }
 };
