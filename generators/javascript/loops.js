@@ -91,14 +91,14 @@ Blockly.JavaScript['controls_for'] = function(block) {
       Blockly.isNumber(increment)) {
     // All arguments are simple numbers.
     var up = parseFloat(argument0) <= parseFloat(argument1);
-    code = 'for (' + variable0 + ' = ' + argument0 + '; ' +
+    code = 'for (HKOIUpdateVar(\'' + variable0 + '\', ' + variable0 + ' = ' + argument0 + '); ' +
         variable0 + (up ? ' <= ' : ' >= ') + argument1 + '; ' +
         variable0;
     var step = Math.abs(parseFloat(increment));
     if (step == 1) {
-      code += up ? '++' : '--';
+      code += 'HKOIUpdateVar(\'' + variable0 + '\', ' + (up ? '++' : '--') + variable0 + ')';
     } else {
-      code += (up ? ' += ' : ' -= ') + step;
+      code += 'HKOIUpdateVar(\'' + variable0 + '\', ' + variable0 + (up ? ' += ' : ' -= ') + step + ')';
     }
     code += ') {\n' + branch + '}\n';
   } else {
@@ -129,11 +129,11 @@ Blockly.JavaScript['controls_for'] = function(block) {
     code += 'if (' + startVar + ' > ' + endVar + ') {\n';
     code += Blockly.JavaScript.INDENT + incVar + ' = -' + incVar + ';\n';
     code += '}\n';
-    code += 'for (' + variable0 + ' = ' + startVar + ';\n' +
+    code += 'for (HKOIUpdateVar(\'' + variable0 + '\', ' + variable0 + ' = ' + startVar + ');\n' +
         '     ' + incVar + ' >= 0 ? ' +
         variable0 + ' <= ' + endVar + ' : ' +
         variable0 + ' >= ' + endVar + ';\n' +
-        '     ' + variable0 + ' += ' + incVar + ') {\n' +
+        '     HKOIUpdateVar(\'' + variable0 + '\', ' + variable0 + ' += ' + incVar + ')) {\n' +
         branch + '}\n';
   }
   return code;
@@ -159,7 +159,8 @@ Blockly.JavaScript['controls_forEach'] = function(block) {
       variable0 + '_index', Blockly.Variables.NAME_TYPE);
   branch = Blockly.JavaScript.INDENT + variable0 + ' = ' +
       listVar + '[' + indexVar + '];\n' + branch;
-  code += 'for (var ' + indexVar + ' in ' + listVar + ') {\n' + branch + '}\n';
+  code += 'for (var ' + indexVar + ' in ' + listVar + ') {\n';
+  code += 'HKOIUpdateVar(\'' + variable0 + '\', String(' + indexVar + '));\n' + branch + '}\n';
   return code;
 };
 
