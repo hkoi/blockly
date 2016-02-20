@@ -37,10 +37,12 @@ Blockly.JavaScript['hkoi_readvars'] = function(block) {
   var numvars = block.getFieldValue('numvars');
   var temp = Blockly.JavaScript.variableDB_.getDistinctName('temp_list', Blockly.Variables.NAME_TYPE);
 
-  var code = 'var ' + temp + ' = window.prompt().match(/(\\S+)/g);\n';
+  var code = '';
+  var varnames = [];
   for (var i = 1; i <= numvars; i++) {
+    varnames.push(block.getFieldValue('variable' + i));
     code += Blockly.JavaScript.variableDB_.getName(block.getFieldValue('variable' + i), Blockly.Variables.NAME_TYPE) +
       ' = isNaN(parseFloat(' + temp + '[' + (i - 1) + '])) ? ' + temp + '[' + (i - 1) + '] : parseFloat(' + temp + '[' + (i - 1) + ']);\n';
   }
-  return code;
+  return 'var ' + temp + ' = window.prompt(' + JSON.stringify(varnames.join(', ')) + ').match(/(\\S+)/g);\n' + code;
 };

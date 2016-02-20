@@ -70,7 +70,7 @@ Blockly.JavaScript['text_append'] = function(block) {
   var argument0 = Blockly.JavaScript.valueToCode(block, 'TEXT',
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
   return varName + ' = String(' + varName + ') + String(' + argument0 + ');\n' +
-           'HKOIUpdateVar(\'' + varName + '\');\n';
+           'HKOIUpdateVar(\'' + varName + '\', String(' + varName + '));\n';
 };
 
 Blockly.JavaScript['text_length'] = function(block) {
