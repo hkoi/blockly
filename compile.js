@@ -27,10 +27,31 @@ var workspace = new Blockly.Workspace();
 Blockly.Xml.domToWorkspace(workspace, xml);
 var code = Blockly.JavaScript.workspaceToCode(workspace);
 
-var prepend = "var HKOIInput = {}; HKOIInput.buf = new Buffer(1024); HKOIInput.br = 0; HKOIInput.str = '';\n";
-prepend += "while (true) {\n  HKOIInput.br = require('fs').readSync(process.stdin.fd, HKOIInput.buf, 0, 1024);\n";
-prepend += "  if (HKOIInput.br == 0) break;\n  HKOIInput.str += HKOIInput.buf.toString(null, 0, HKOIInput.br);\n}\n";
-prepend += "HKOIInput.lines = HKOIInput.str.split('\\n');\n";
-prepend += "var window = { 'alert': function(x) { console.log(x); }, 'prompt': function(x) { return HKOIInput.lines.shift(); } };\n\n";
+var prepend = `
+  var HKOIInput = {
+    str : '',
+    lines : []
+  };
+  var window = {
+    'alert': function(x) {
+      console.log(x);
+    },
+    'prompt': function(x) {
+      while (true) {
+        var buf = new Buffer(1024);
+        var br = require('fs').readSync(process.stdin.fd, buf, 0, 1024);
+        if (br == 0) break;
+        HKOIInput.str += buf.toString(null, 0, br);
+      }
+      var lines = HKOIInput.str.split('\\n');
+      for (var i in lines) {
+        HKOIInput.lines.push(lines[i]);
+      }
+      return HKOIInput.lines.shift();
+    }
+  };
+  var HKOIUpdateVar = function() {};
+`;
 code = prepend + code;
 fs.writeFileSync('program.exe', code);
+fs.chmodSync('program.exe', 493);
