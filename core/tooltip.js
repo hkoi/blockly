@@ -167,10 +167,10 @@ Blockly.Tooltip.onMouseOut_ = function(e) {
   // event and kill it if a mouseOver is received immediately.
   // This way the task only fully executes if mousing into the void.
   Blockly.Tooltip.mouseOutPid_ = setTimeout(function() {
-        Blockly.Tooltip.element_ = null;
-        Blockly.Tooltip.poisonedElement_ = null;
-        Blockly.Tooltip.hide();
-      }, 1);
+    Blockly.Tooltip.element_ = null;
+    Blockly.Tooltip.poisonedElement_ = null;
+    Blockly.Tooltip.hide();
+  }, 1);
   clearTimeout(Blockly.Tooltip.showPid_);
 };
 
@@ -184,7 +184,7 @@ Blockly.Tooltip.onMouseMove_ = function(e) {
   if (!Blockly.Tooltip.element_ || !Blockly.Tooltip.element_.tooltip) {
     // No tooltip here to show.
     return;
-  } else if (Blockly.dragMode_ != 0) {
+  } else if (Blockly.dragMode_ != Blockly.DRAG_NONE) {
     // Don't display a tooltip during a drag.
     return;
   } else if (Blockly.WidgetDiv.isVisible()) {
