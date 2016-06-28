@@ -396,3 +396,5 @@ Blockly.Msg.PROCEDURES_DEFRETURN_COMMENT = Blockly.Msg.PROCEDURES_DEFNORETURN_CO
 Blockly.Msg.HKOI_LINE_BREAK = "換行符";
 Blockly.Msg.HKOI_READVARS_INPUT = "讀取";
 Blockly.Msg.HKOI_READVARS_VARS = "個變量:";
+Blockly.Msg.HKOI_DP_TO = "四捨五入至小數後";
+Blockly.Msg.HKOI_DP_DECIMAL_PLACES = "位";

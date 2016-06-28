@@ -396,3 +396,5 @@ Blockly.Msg.PROCEDURES_DEFRETURN_COMMENT = Blockly.Msg.PROCEDURES_DEFNORETURN_CO
 Blockly.Msg.HKOI_LINE_BREAK = "Line break";
 Blockly.Msg.HKOI_READVARS_INPUT = "Read";
 Blockly.Msg.HKOI_READVARS_VARS = "variables:";
+Blockly.Msg.HKOI_DP_TO = "rounded off to";
+Blockly.Msg.HKOI_DP_DECIMAL_PLACES = "decimal places";

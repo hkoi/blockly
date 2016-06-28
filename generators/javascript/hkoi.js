@@ -46,3 +46,11 @@ Blockly.JavaScript['hkoi_readvars'] = function(block) {
   }
   return 'var ' + temp + ' = window.prompt(' + JSON.stringify(varnames.join(', ')) + ').match(/(\\S+)/g);\n' + code;
 };
+
+
+Blockly.JavaScript['hkoi_dp'] = function(block) {
+  var arg = Blockly.JavaScript.valueToCode(block, 'value',
+        Blockly.JavaScript.ORDER_NONE) || '0';
+  var dp = parseInt(block.getFieldValue('dp'));
+  return ['(' + arg + ').toFixed(' + dp + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};

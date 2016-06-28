@@ -116,3 +116,17 @@ Blockly.Blocks['hkoi_readvars'] = {
     return list;
   }
 };
+
+Blockly.Blocks['hkoi_dp'] = {
+  init: function() {
+    this.appendValueInput("value")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.HKOI_DP_TO)
+        .appendField(new Blockly.FieldTextInput("3"), "dp")
+        .appendField(Blockly.Msg.HKOI_DP_DECIMAL_PLACES);
+    this.setInputsInline(true);
+    this.setColour(Blockly.Blocks.math.HUE);
+    this.setOutput(true, 'Number');
+  }
+};
