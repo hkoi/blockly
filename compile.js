@@ -3,11 +3,11 @@
 'use strict';
 
 global.DOMParser = require('xmldom').DOMParser; 
-require('../closure-library/closure/goog/bootstrap/nodejs')
+//require('../closure-library/closure/goog/bootstrap/nodejs')
 global.Blockly = require('./blockly_wrapped.js');
-require('./blocks_compressed.js');
-require('./javascript_compressed.js');
-require('./msg/js/en.js');
+//require('./blocks_compressed.js');
+//require('./javascript_compressed.js');
+//require('./msg/js/en.js');
 
 Blockly.Events.Create = function() { this.isNull=function(){return 1}; };
 
