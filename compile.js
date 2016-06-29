@@ -51,6 +51,8 @@ var prepend = `
     }
   };
   var HKOIUpdateVar = function() {};
+  var HKOIEnterScope = function() {};
+  var HKOIExitScope = function() {};
 `;
 code = prepend + code;
 code = code.replace(/^\s*HKOIUpdateVar.*/gm, '');
