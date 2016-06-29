@@ -91,14 +91,14 @@ Blockly.JavaScript['controls_for'] = function(block) {
       Blockly.isNumber(increment)) {
     // All arguments are simple numbers.
     var up = parseFloat(argument0) <= parseFloat(argument1);
-    code = 'for (HKOIUpdateVar(\'' + variable0 + '\', ' + variable0 + ' = ' + argument0 + '); ' +
-        variable0 + (up ? ' <= ' : ' >= ') + argument1 + '; ' +
-        variable0;
+    code = 'for (' + variable0 + ' = ' + argument0 + ';\n' +
+        'HKOIUpdateVar(\'' + variable0 + '\', ' + variable0 + ') === 1 ||\n' + 
+        variable0 + (up ? ' <= ' : ' >= ') + argument1 + '; ';
     var step = Math.abs(parseFloat(increment));
     if (step == 1) {
-      code += 'HKOIUpdateVar(\'' + variable0 + '\', ' + (up ? '++' : '--') + variable0 + ')';
+      code += (up ? '++' : '--') + variable0;
     } else {
-      code += 'HKOIUpdateVar(\'' + variable0 + '\', ' + variable0 + (up ? ' += ' : ' -= ') + step + ')';
+      code += variable0 + (up ? ' += ' : ' -= ') + step;
     }
     code += ') {\n' + branch + '}\n';
   } else {
@@ -129,11 +129,12 @@ Blockly.JavaScript['controls_for'] = function(block) {
     code += 'if (' + startVar + ' > ' + endVar + ') {\n';
     code += Blockly.JavaScript.INDENT + incVar + ' = -' + incVar + ';\n';
     code += '}\n';
-    code += 'for (HKOIUpdateVar(\'' + variable0 + '\', ' + variable0 + ' = ' + startVar + ');\n' +
+    code += 'for (' + variable0 + ' = ' + startVar + ';\n' +
+        '     HKOIUpdateVar(\'' + variable0 + '\', ' + variable0 + ') === 1 ||\n' + 
         '     ' + incVar + ' >= 0 ? ' +
         variable0 + ' <= ' + endVar + ' : ' +
         variable0 + ' >= ' + endVar + ';\n' +
-        '     HKOIUpdateVar(\'' + variable0 + '\', ' + variable0 + ' += ' + incVar + ')) {\n' +
+        '     ' + variable0 + ' += ' + incVar + ') {\n' +
         branch + '}\n';
   }
   return code;

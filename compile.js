@@ -53,5 +53,7 @@ var prepend = `
   var HKOIUpdateVar = function() {};
 `;
 code = prepend + code;
+code = code.replace(/^\s*HKOIUpdateVar.*/gm, '');
+
 fs.writeFileSync('program.exe', code);
 fs.chmodSync('program.exe', 493);
