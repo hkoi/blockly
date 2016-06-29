@@ -28,31 +28,31 @@ Blockly.Xml.domToWorkspace(xml, workspace);
 var code = Blockly.JavaScript.workspaceToCode(workspace);
 
 var prepend = `
-  var HKOIInput = {
-    str : '',
-    lines : []
-  };
-  var window = {
-    'alert': function(x) {
-      console.log(x);
-    },
-    'prompt': function(x) {
-      while (true) {
-        var buf = new Buffer(1024);
-        var br = require('fs').readSync(process.stdin.fd, buf, 0, 1024);
-        if (br == 0) break;
-        HKOIInput.str += buf.toString(null, 0, br);
-      }
-      var lines = HKOIInput.str.split('\\n');
-      for (var i in lines) {
-        HKOIInput.lines.push(lines[i]);
-      }
-      return HKOIInput.lines.shift();
-    }
-  };
-  var HKOIUpdateVar = function() {};
-  var HKOIEnterScope = function() {};
-  var HKOIExitScope = function() {};
+var HKOIInput = {
+  lines : []
+};
+var window = {
+  'alert': function(x) {
+    console.log(x);
+  },
+  'prompt': function(x) {
+    return HKOIInput.lines.shift();
+  }
+};
+var HKOIUpdateVar = function() {};
+var HKOIEnterScope = function() {};
+var HKOIExitScope = function() {};
+(function() {
+  var str = "";
+  while (true) {
+    var buf = new Buffer(1024);
+    var br = require('fs').readSync(process.stdin.fd, buf, 0, 1024);
+    if (br == 0) break;
+    str += buf.toString(null, 0, br);
+  }
+  HKOIInput.lines = str.split('\\n');
+})();
+
 `;
 code = prepend + code;
 code = code.replace(/^\s*HKOIUpdateVar.*/gm, '');
