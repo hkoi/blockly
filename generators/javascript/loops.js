@@ -160,7 +160,7 @@ Blockly.JavaScript['controls_forEach'] = function(block) {
   branch = Blockly.JavaScript.INDENT + variable0 + ' = ' +
       listVar + '[' + indexVar + '];\n' + branch;
   code += 'for (var ' + indexVar + ' in ' + listVar + ') {\n';
-  code += 'HKOIUpdateVar(\'' + variable0 + '\', String(' + indexVar + '));\n' + branch + '}\n';
+  code += 'HKOIUpdateVar(\'' + variable0 + '\', ' + indexVar + ');\n' + branch + '}\n';
   return code;
 };
 

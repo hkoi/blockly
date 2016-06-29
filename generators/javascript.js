@@ -43,7 +43,7 @@ Blockly.JavaScript = new Blockly.Generator('JavaScript');
  * @private
  */
 Blockly.JavaScript.addReservedWords(
-    'HKOIInput,HKOIOutput,HKOIUpdateVar,' + // HKOI
+    'HKOIInput,HKOIOutput,HKOIUpdateVar,HKOIEnterScope,HKOIExitScope' + // HKOI
     'Blockly,' +  // In case JS is evaled in the current window.
     // https://developer.mozilla.org/en/JavaScript/Reference/Reserved_Words
     'break,case,catch,continue,debugger,default,delete,do,else,finally,for,function,if,in,instanceof,new,return,switch,this,throw,try,typeof,var,void,while,with,' +
@@ -132,12 +132,15 @@ Blockly.JavaScript.init = function(workspace) {
   var variables = Blockly.Variables.allVariables(workspace);
   if (variables.length) {
     for (var i = 0; i < variables.length; i++) {
-      defvars[i] = Blockly.JavaScript.variableDB_.getName(variables[i],
+      var name = Blockly.JavaScript.variableDB_.getName(variables[i],
           Blockly.Variables.NAME_TYPE);
+      defvars[i] = name;
     }
     Blockly.JavaScript.definitions_['variables'] =
         'var ' + defvars.join(', ') + ';';
   }
+  Blockly.JavaScript.definitions_['global'] =
+      'HKOIEnterScope(\'Global\', ' + JSON.stringify(defvars) + ');';
 };
 
 /**

@@ -259,7 +259,7 @@ Blockly.JavaScript['lists_setIndex'] = function(block) {
     }
     throw 'Unhandled combination (lists_setIndex).';
   };
-  return codeFunc() + 'HKOIUpdateVar(\'' + list + '\', String(' + list + '));\n';
+  return codeFunc() + 'HKOIUpdateVar(\'' + list + '\', ' + list + ');\n';
 };
 
 Blockly.JavaScript['lists_getSublist'] = function(block) {
