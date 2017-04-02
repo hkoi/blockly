@@ -6,5 +6,3 @@ npm-debug.log
 *.pyc
 *.komodoproject
 /nbproject/private/
-blockly_compressed.js
-javascript_compressed.js
