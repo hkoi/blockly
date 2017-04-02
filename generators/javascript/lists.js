@@ -174,13 +174,26 @@ Blockly.JavaScript['lists_getIndex'] = function(block) {
 };
 
 Blockly.JavaScript['lists_setIndex'] = function(block) {
-  // Get element at index.
-  // Note: Until January 2013 this block did not have MODE or WHERE inputs.
+  // Set element at index.
+  // Note: Until February 2013 this block did not have MODE or WHERE inputs.
+  var list = Blockly.JavaScript.valueToCode(block, 'LIST',
+      Blockly.JavaScript.ORDER_MEMBER) || '[]';
   var mode = block.getFieldValue('MODE') || 'GET';
   var where = block.getFieldValue('WHERE') || 'FROM_START';
-  var listOrder = (where == 'RANDOM') ? Blockly.JavaScript.ORDER_COMMA :
-      Blockly.JavaScript.ORDER_MEMBER;
-  var list = Blockly.JavaScript.valueToCode(block, 'VALUE', listOrder) || '[]';
+  var value = Blockly.JavaScript.valueToCode(block, 'TO',
+      Blockly.JavaScript.ORDER_ASSIGNMENT) || 'null';
+  // Cache non-trivial values to variables to prevent repeated look-ups.
+  // Closure, which accesses and modifies 'list'.
+  function cacheList() {
+    if (list.match(/^\w+$/)) {
+      return '';
+    }
+    var listVar = Blockly.JavaScript.variableDB_.getDistinctName(
+        'tmpList', Blockly.Variables.NAME_TYPE);
+    var code = 'var ' + listVar + ' = ' + list + ';\n';
+    list = listVar;
+    return code;
+  }
   var codeFunc = function() {
   switch (where) {
     case ('FIRST'):
