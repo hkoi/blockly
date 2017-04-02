@@ -45,7 +45,8 @@
   },
   "dependencies": {
     "lodash": "^4.5.0",
-    "xmldom": "^0.1.22"
+    "xmldom": "^0.1.22",
+    "closure-library": "^1.43629075.2"
   },
   "bin": {
     "blockly": "./compile.js"

@@ -5,10 +5,8 @@ Google's Blockly is a web-based, visual programming editor that is accessible
 to blind users.
 
 The code in this directory renders a version of the Blockly toolbox and
-workspace that is fully keyboard-navigable, and compatible with JAWS/NVDA
-screen readers on Firefox for Windows. (We chose this combination because JAWS
-and NVDA are the most robust screen readers, and are compatible with many more
-aria tags than other screen readers.)
+workspace that is fully keyboard-navigable, and compatible with most screen
+readers. It is optimized for NVDA on Firefox.
 
 In the future, Accessible Blockly may be modified to suit accessibility needs
 other than visual impairments. Note that deaf users are expected to continue
@@ -23,27 +21,31 @@ in the same order as in the demo: utils.service.js will need to be the first
 Angular file imported.
 
 When the DOMContentLoaded event fires, call ng.platform.browser.bootstrap() on
-the main component to be loaded. This will usually be blocklyApp.AppView, but
-if you have another component that wraps it, use that one instead.
+the main component to be loaded. This will usually be blocklyApp.AppComponent,
+but if you have another component that wraps it, use that one instead.
 
 
-Customizing the Toolbar
------------------------
-The Accessible Blockly workspace comes with a customizable toolbar.
+Customizing the Sidebar and Audio
+---------------------------------
+The Accessible Blockly workspace comes with a customizable sidebar.
 
-To customize the toolbar, you will need to declare an ACCESSIBLE_GLOBALS object
+To customize the sidebar, you will need to declare an ACCESSIBLE_GLOBALS object
 in the global scope that looks like this:
 
     var ACCESSIBLE_GLOBALS = {
-      toolbarButtonConfig: []
+      mediaPathPrefix: null,
+      customSidebarButtons: []
     };
 
-The value corresponding to 'toolbarButtonConfig' can be modified by adding
-objects representing buttons on the toolbar. Each of these objects should have
-two keys:
+The value of mediaPathPrefix should be the location of the accessible/media
+folder.
 
+The value of 'customSidebarButtons' should be a list of objects, each
+representing buttons on the sidebar. Each of these objects should have the
+following keys:
   - 'text' (the text to display on the button)
   - 'action' (the function that gets run when the button is clicked)
+  - 'id' (optional; the id of the button)
 
 
 Limitations
