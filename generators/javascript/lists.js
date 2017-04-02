@@ -380,7 +380,7 @@ Blockly.JavaScript['lists_split'] = function(block) {
   var delimiter = Blockly.JavaScript.valueToCode(block, 'DELIM',
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
   var mode = block.getFieldValue('MODE');
-  if (mode == 'SPLIT') {
+  if (mode == 'SPLIT' || mode == 'SPLIT_NUMERIC') {
     if (!input) {
       input = '\'\'';
     }
@@ -393,7 +393,7 @@ Blockly.JavaScript['lists_split'] = function(block) {
   } else {
     throw 'Unknown mode: ' + mode;
   }
-  var code = input + '.' + functionName + '(' + delimiter + ')';
+  var code = input + '.' + functionName + '(' + delimiter + ')' + (mode == 'SPLIT_NUMERIC' ? '.map(parseFloat)' : '');
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 

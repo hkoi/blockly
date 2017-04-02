@@ -404,10 +404,18 @@ Blockly.Msg.PROCEDURES_DEFRETURN_COMMENT = Blockly.Msg.PROCEDURES_DEFNORETURN_CO
 
 
 Blockly.Msg.HKOI_LINE_BREAK = "換行符";
-Blockly.Msg.HKOI_READVARS_INPUT = "讀取";
+Blockly.Msg.HKOI_READVARS_INPUT = "讀取一行至";
+Blockly.Msg.HKOI_READVARS_VARS = "個變量:";
 Blockly.Msg.HKOI_READVARS_VARS = "個變量:";
 Blockly.Msg.HKOI_DP_TO = "四捨五入至小數後";
 Blockly.Msg.HKOI_DP_DECIMAL_PLACES = "位";
+Blockly.Msg.HKOI_BITWISE_AND = "位元AND";
+Blockly.Msg.HKOI_BITWISE_OR = "位元OR";
+Blockly.Msg.HKOI_BITWISE_XOR = "位元XOR";
+Blockly.Msg.HKOI_BITWISE_NOT = "位元NOT";
+Blockly.Msg.HKOI_BITWISE_SHL = "左移";
+Blockly.Msg.HKOI_BITWISE_SHR_SIGNED = "帶符號右移";
+Blockly.Msg.HKOI_BITWISE_SHR_UNSIGNED = "不帶符號右移";
 
 Blockly.Msg.MATH_HUE = "230";
 Blockly.Msg.LOOPS_HUE = "120";

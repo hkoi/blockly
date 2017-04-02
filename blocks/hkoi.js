@@ -130,3 +130,36 @@ Blockly.Blocks['hkoi_dp'] = {
     this.setOutput(true, 'Number');
   }
 };
+
+Blockly.Blocks['hkoi_bitwise_not'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.HKOI_BITWISE_NOT);
+    this.appendValueInput("value")
+        .setCheck("Number");
+    this.setInputsInline(true);
+    this.setColour(Blockly.Blocks.math.HUE);
+    this.setOutput(true, 'Number');
+  }
+};
+
+Blockly.Blocks['hkoi_bitwise'] = {
+  init: function() {
+    var OPTIONS =
+        [[Blockly.Msg.HKOI_BITWISE_AND, 'AND'],
+         [Blockly.Msg.HKOI_BITWISE_OR, 'OR'],
+         [Blockly.Msg.HKOI_BITWISE_XOR, 'XOR'],
+         [Blockly.Msg.HKOI_BITWISE_SHL, 'SHL'],
+         [Blockly.Msg.HKOI_BITWISE_SHR_SIGNED, 'SHR_SIGNED'],
+         [Blockly.Msg.HKOI_BITWISE_SHR_UNSIGNED, 'SHR_UNSIGNED']];
+    this.appendValueInput("value1")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown(OPTIONS), 'mode');
+    this.appendValueInput("value2")
+        .setCheck("Number");
+    this.setInputsInline(true);
+    this.setColour(Blockly.Blocks.math.HUE);
+    this.setOutput(true, 'Number');
+  }
+};

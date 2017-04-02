@@ -56,3 +56,26 @@ Blockly.JavaScript['hkoi_dp'] = function(block) {
   var dp = parseInt(block.getFieldValue('dp'));
   return ['(' + arg + ').toFixed(' + dp + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
+
+Blockly.JavaScript['hkoi_bitwise_not'] = function(block) {
+  var arg = Blockly.JavaScript.valueToCode(block, 'value',
+        Blockly.JavaScript.ORDER_NONE) || '0';
+  return ['~(parseInt(' + arg + '))', Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+Blockly.JavaScript['hkoi_bitwise'] = function(block) {
+  var arg1 = Blockly.JavaScript.valueToCode(block, 'value1',
+        Blockly.JavaScript.ORDER_NONE) || '0';
+  var arg2 = Blockly.JavaScript.valueToCode(block, 'value2',
+        Blockly.JavaScript.ORDER_NONE) || '0';
+  var op = '&';
+  switch (block.getFieldValue('mode')) {
+    case 'AND': op = '&'; break;
+    case 'OR': op = '|'; break;
+    case 'XOR': op = '^'; break;
+    case 'SHL': op = '<<'; break;
+    case 'SHR_SIGNED': op = '>>'; break;
+    case 'SHR_UNSIGNED': op = '>>>'; break;
+  }
+  return ['(parseInt(' + arg1 + ') ' + op + ' parseInt(' + arg2 + '))', Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
