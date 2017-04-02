@@ -458,7 +458,7 @@ Blockly.utils.checkMessageReferences = function(message) {
   while (match != null) {
     var msgKey = match[1];
     if (Blockly.Msg[msgKey] == null) {
-      console.log('WARNING: No message string for %{BKY_' + msgKey + '}.');
+      //console.log('WARNING: No message string for %{BKY_' + msgKey + '}.');
       isValid = false;
     }
 
