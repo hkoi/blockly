@@ -88,7 +88,7 @@ Blockly.JavaScript['lists_indexOf'] = function(block) {
   var argument1 = Blockly.JavaScript.valueToCode(block, 'VALUE',
       Blockly.JavaScript.ORDER_MEMBER) || '[]';
   var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
-  return [code, Blockly.JavaScript.ORDER_MEMBER];
+  return [code, Blockly.JavaScript.ORDER_ADDITION];
 };
 
 Blockly.JavaScript['lists_getIndex'] = function(block) {
@@ -318,10 +318,10 @@ Blockly.JavaScript['lists_sort'] = function(block) {
       '    "NUMERIC": function(a, b) {',
       '        return parseFloat(a) - parseFloat(b); },',
       '    "TEXT": function(a, b) {',
-      '        return a.toString().localeCompare(b.toString(), "en"); },',
+      '        return a.toString() > b.toString() ? 1 : -1; },',
       '    "IGNORE_CASE": function(a, b) {',
-      '        return a.toString().localeCompare(b.toString(), "en",',
-      '          {"sensitivity": "base"}); },',
+      '        return a.toString().toLowerCase() > ' +
+      'b.toString().toLowerCase() ? 1 : -1; },',
       '  };',
       '  var compare = compareFuncs[type];',
       '  return function(a, b) { return compare(a, b) * direction; }',

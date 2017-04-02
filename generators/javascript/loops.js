@@ -133,8 +133,8 @@ Blockly.JavaScript['controls_for'] = function(block) {
         '     HKOIUpdateVar(\'' + variable0 + '\', ' + variable0 + ') === 1 ||\n' + 
         '     ' + incVar + ' >= 0 ? ' +
         variable0 + ' <= ' + endVar + ' : ' +
-        variable0 + ' >= ' + endVar + ';\n' +
-        '     ' + variable0 + ' += ' + incVar + ') {\n' +
+        variable0 + ' >= ' + endVar + '; ' +
+        variable0 + ' += ' + incVar + ') {\n' +
         branch + '}\n';
   }
   return code;
