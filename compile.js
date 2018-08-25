@@ -46,11 +46,13 @@ var HKOIExitScope = function() {};
   var str = "";
   while (true) {
     var buf = new Buffer(1024);
-    var br = require('fs').readSync(process.stdin.fd, buf, 0, 1024);
+    var fs = require('fs')
+    var stdin = fs.openSync('/dev/stdin', 'r');
+    var br = fs.readSync(stdin, buf, 0, 1024);
     if (br == 0) break;
-    str += buf.toString(null, 0, br);
+    str += buf.toString();
   }
-  HKOIInput.lines = str.split('\\n');
+  HKOIInput.lines = str.split('\n');
 })();
 
 `;
