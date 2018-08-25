@@ -42,21 +42,27 @@ var window = {
 var HKOIUpdateVar = function() {};
 var HKOIEnterScope = function() {};
 var HKOIExitScope = function() {};
+
+const solution = () => {
+`;
+
+var append = `
+};
+
 (function() {
   var str = "";
-  while (true) {
-    var buf = new Buffer(1024);
-    var fs = require('fs')
-    var stdin = fs.openSync('/dev/stdin', 'r');
-    var br = fs.readSync(stdin, buf, 0, 1024);
-    if (br == 0) break;
-    str += buf.toString();
-  }
-  HKOIInput.lines = str.split('\n');
+  process.stdin.on('readable', () => {
+    const chunk = process.stdin.read();
+    str += chunk;
+  });
+  process.stdin.on('end', () => {
+    HKOIInput.lines = str.split('\\n');
+    solution();
+  });
 })();
-
 `;
-code = prepend + code;
+
+code = prepend + code + append;
 code = code.replace(/^\s*HKOIUpdateVar.*/gm, '');
 
 fs.writeFileSync('program.exe', code);
