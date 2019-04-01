@@ -25,6 +25,7 @@ catch (e) {
 
 var workspace = new Blockly.Workspace();
 Blockly.Xml.domToWorkspace(xml, workspace);
+workspace.options.oneBasedIndex = true;
 var code = Blockly.JavaScript.workspaceToCode(workspace);
 
 var prepend = `
