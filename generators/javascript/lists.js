@@ -393,7 +393,11 @@ Blockly.JavaScript['lists_split'] = function(block) {
   } else {
     throw 'Unknown mode: ' + mode;
   }
-  var code = input + '.' + functionName + '(' + delimiter + ')' + (mode == 'SPLIT_NUMERIC' ? '.map(parseFloat)' : '');
+  var getCompareFunctionName = Blockly.JavaScript.provideFunction_(
+    'pFloat',
+    ['function ' + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ +
+     '  (x) { return parseFloat(x, 10); } ']);
+  var code = input + '.' + functionName + '(' + delimiter + ')' + (mode == 'SPLIT_NUMERIC' ? '.map(' + getCompareFunctionName + ')' : '');
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
