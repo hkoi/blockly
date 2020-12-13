@@ -8,16 +8,7 @@
   <script src="/storage.js"></script>
   <script src="../../blockly_compressed.js"></script>
   <script src="../../blocks_compressed.js"></script>
-  <script src="../../blocks/hkoi.js"></script>
-  <script src="../../generators/javascript.js"></script>
-  <script src="../../generators/javascript/logic.js"></script>
-  <script src="../../generators/javascript/loops.js"></script>
-  <script src="../../generators/javascript/math.js"></script>
-  <script src="../../generators/javascript/text.js"></script>
-  <script src="../../generators/javascript/lists.js"></script>
-  <script src="../../generators/javascript/variables.js"></script>
-  <script src="../../generators/javascript/procedures.js"></script>
-  <script src="../../generators/javascript/hkoi.js"></script>
+  <script src="../../javascript_compressed.js"></script>
   <script src="code.js"></script>
 </head>
 <body>
@@ -373,7 +364,7 @@
     <sep></sep>
     <category name="{catVariables}" colour="330" custom="VARIABLE"></category>
     <category name="{catFunctions}" colour="290" custom="PROCEDURE"></category>
-    <category id="catHKOI" colour="140">
+    <category name="{catHKOI}" colour="140">
       <block type="hkoi_endl"></block>
       <block type="hkoi_readvars"></block>
       <block type="hkoi_dp"></block>
@@ -384,7 +375,7 @@
 <script>
 var HKOIEnterScope = function() {};
 var HKOIExitScope = function() {};
-var HKOIUpdateVars = function() {};
+var HKOIUpdateVar = function() {};
 </script>
 </body>
 </html>

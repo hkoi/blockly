@@ -40,13 +40,13 @@ Blockly.JavaScript['hkoi_readvars'] = function(block) {
   var code = '';
   var varnames = [];
   for (var i = 1; i <= numvars; i++) {
-    varnames.push(block.getFieldValue('variable' + i));
     var name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('variable' + i), Blockly.Variables.NAME_TYPE);
+    varnames.push(name);
     code += name +
       ' = isNaN(parseFloat(' + temp + '[' + (i - 1) + '])) ? ' + temp + '[' + (i - 1) + '] : parseFloat(' + temp + '[' + (i - 1) + ']);\n';
     code += 'HKOIUpdateVar(\'' + name + '\', ' + name + ');\n';
   }
-  return 'var ' + temp + ' = window.prompt(' + JSON.stringify(varnames.join(', ')) + ').match(/(\\S+)/g);\n' + code;
+  return 'var ' + temp + ' = window.prompt("' + Blockly.Msg.HKOI_READ_VARS_PROMPT + '\\n" + ' + JSON.stringify(varnames.join(' ')) + ').match(/(\\S+)/g);\n' + code;
 };
 
 

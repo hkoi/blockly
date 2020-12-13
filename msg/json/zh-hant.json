@@ -372,5 +372,6 @@
 	"HKOI_BITWISE_NOT": "位元NOT",
 	"HKOI_BITWISE_SHL": "左移",
 	"HKOI_BITWISE_SHR_SIGNED": "帶符號右移",
-	"HKOI_BITWISE_SHR_UNSIGNED": "不帶符號右移"
+	"HKOI_BITWISE_SHR_UNSIGNED": "不帶符號右移",
+	"HKOI_READ_VARS_PROMPT": "請輸入以下變量的值 (以空格分隔):"
 }

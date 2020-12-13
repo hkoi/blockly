@@ -36,7 +36,7 @@ Blockly.Blocks['hkoi_endl'] = {
   init: function() {
     this.setColour(160);
     this.setOutput(true, 'String');
-    this.appendDummyInput().appendField(Blockly.Msg.HKOI_LINE_BREAK);
+    this.appendDummyInput().appendField(Blockly.Msg['HKOI_LINE_BREAK']);
   }
 };
 
@@ -44,23 +44,23 @@ Blockly.Blocks['hkoi_readvars'] = {
   init: function() {
     var OPTIONS =
         [['1', '1'],
-         ['2', '2'],
-         ['3', '3'],
-         ['4', '4'],
-         ['5', '5'],
-         ['6', '6'],
-         ['7', '7'],
-         ['8', '8']];
+          ['2', '2'],
+          ['3', '3'],
+          ['4', '4'],
+          ['5', '5'],
+          ['6', '6'],
+          ['7', '7'],
+          ['8', '8']];
     this.setColour(330);
     var dropdown = new Blockly.FieldDropdown(OPTIONS, function(option) {
       this.sourceBlock_.updateShape_(option);
     });
     this.appendDummyInput()
-        .appendField(Blockly.Msg.HKOI_READVARS_INPUT)
+        .appendField(Blockly.Msg['HKOI_READVARS_INPUT'])
         .appendField(dropdown, 'numvars')
-        .appendField(Blockly.Msg.HKOI_READVARS_VARS);
+        .appendField(Blockly.Msg['HKOI_READVARS_VARS']);
     this.appendDummyInput("var1")
-        .appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME + '1'), "variable1");
+        .appendField(new Blockly.FieldVariable(Blockly.Msg['VARIABLES_DEFAULT_NAME'] + '1'), "variable1");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
@@ -99,7 +99,7 @@ Blockly.Blocks['hkoi_readvars'] = {
         if (!inputExists) {
           this.appendDummyInput('var' + i)
               .appendField(',')
-              .appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_DEFAULT_NAME + i), "variable" + i);
+              .appendField(new Blockly.FieldVariable(Blockly.Msg['VARIABLES_DEFAULT_NAME'] + i), "variable" + i);
         }
       } else if (inputExists) {
         this.removeInput('var' + i);
@@ -122,11 +122,11 @@ Blockly.Blocks['hkoi_dp'] = {
     this.appendValueInput("value")
         .setCheck("Number");
     this.appendDummyInput()
-        .appendField(Blockly.Msg.HKOI_DP_TO)
+        .appendField(Blockly.Msg['HKOI_DP_TO'])
         .appendField(new Blockly.FieldTextInput("3"), "dp")
-        .appendField(Blockly.Msg.HKOI_DP_DECIMAL_PLACES);
+        .appendField(Blockly.Msg['HKOI_DP_DECIMAL_PLACES']);
     this.setInputsInline(true);
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Constants.Math.HUE);
     this.setOutput(true, 'Number');
   }
 };
@@ -134,11 +134,11 @@ Blockly.Blocks['hkoi_dp'] = {
 Blockly.Blocks['hkoi_bitwise_not'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(Blockly.Msg.HKOI_BITWISE_NOT);
+        .appendField(Blockly.Msg['HKOI_BITWISE_NOT']);
     this.appendValueInput("value")
         .setCheck("Number");
     this.setInputsInline(true);
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Constants.Math.HUE);
     this.setOutput(true, 'Number');
   }
 };
@@ -146,12 +146,12 @@ Blockly.Blocks['hkoi_bitwise_not'] = {
 Blockly.Blocks['hkoi_bitwise'] = {
   init: function() {
     var OPTIONS =
-        [[Blockly.Msg.HKOI_BITWISE_AND, 'AND'],
-         [Blockly.Msg.HKOI_BITWISE_OR, 'OR'],
-         [Blockly.Msg.HKOI_BITWISE_XOR, 'XOR'],
-         [Blockly.Msg.HKOI_BITWISE_SHL, 'SHL'],
-         [Blockly.Msg.HKOI_BITWISE_SHR_SIGNED, 'SHR_SIGNED'],
-         [Blockly.Msg.HKOI_BITWISE_SHR_UNSIGNED, 'SHR_UNSIGNED']];
+        [[Blockly.Msg['HKOI_BITWISE_AND'], 'AND'],
+          [Blockly.Msg['HKOI_BITWISE_OR'], 'OR'],
+          [Blockly.Msg['HKOI_BITWISE_XOR'], 'XOR'],
+          [Blockly.Msg['HKOI_BITWISE_SHL'], 'SHL'],
+          [Blockly.Msg['HKOI_BITWISE_SHR_SIGNED'], 'SHR_SIGNED'],
+          [Blockly.Msg['HKOI_BITWISE_SHR_UNSIGNED'], 'SHR_UNSIGNED']];
     this.appendValueInput("value1")
         .setCheck("Number");
     this.appendDummyInput()
@@ -159,7 +159,7 @@ Blockly.Blocks['hkoi_bitwise'] = {
     this.appendValueInput("value2")
         .setCheck("Number");
     this.setInputsInline(true);
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Constants.Math.HUE);
     this.setOutput(true, 'Number');
   }
 };

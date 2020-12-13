@@ -151,7 +151,8 @@ Blockly.JavaScript.init = function(workspace) {
   // Add user variables, but only ones that are being used.
   var variables = Blockly.Variables.allUsedVarModels(workspace);
   for (var i = 0; i < variables.length; i++) {
-    defvars.push();
+    defvars.push(Blockly.JavaScript.variableDB_.getName(variables[i].getId(),
+        Blockly.VARIABLE_CATEGORY_NAME));
   }
 
   // Declare all of the variables.

@@ -1436,6 +1436,7 @@ Blockly.Msg.LISTS_SPLIT_HELPURL = 'https://github.com/google/blockly/wiki/Lists#
 /** @type {string} */
 /// dropdown - Indicates that text will be split up into a list (e.g. "a-b-c" -> ["a", "b", "c"]).
 Blockly.Msg.LISTS_SPLIT_LIST_FROM_TEXT = 'make list from text';
+Blockly.Msg.LISTS_SPLIT_NUMERIC_LIST_FROM_TEXT = 'make list of numbers from text';
 /** @type {string} */
 /// dropdown - Indicates that a list will be joined together to form text (e.g. ["a", "b", "c"] -> "a-b-c").
 Blockly.Msg.LISTS_SPLIT_TEXT_FROM_LIST = 'make text from list';
@@ -1446,6 +1447,7 @@ Blockly.Msg.LISTS_SPLIT_WITH_DELIMITER = 'with delimiter';
 /// tooltip - See [https://github.com/google/blockly/wiki/Lists#make-list-from-text
 /// https://github.com/google/blockly/wiki/Lists#make-list-from-text] for more information.
 Blockly.Msg.LISTS_SPLIT_TOOLTIP_SPLIT = 'Split text into a list of texts, breaking at each delimiter.';
+Blockly.Msg.LISTS_SPLIT_TOOLTIP_SPLIT_NUMERIC = 'Split text into a list of texts, breaking at each delimiter.';
 /** @type {string} */
 /// tooltip - See [https://github.com/google/blockly/wiki/Lists#make-text-from-list
 /// https://github.com/google/blockly/wiki/Lists#make-text-from-list] for more information.
@@ -1628,3 +1630,17 @@ Blockly.Msg.WORKSPACE_ARIA_LABEL = 'Blockly Workspace';
 /// that block have warnings attached to them. It should inform the user that the
 /// block they collapsed contains blocks that have warnings.
 Blockly.Msg.COLLAPSED_WARNINGS_WARNING = 'Collapsed blocks contain warnings.';
+
+Blockly.Msg.HKOI_LINE_BREAK = 'Line break';
+Blockly.Msg.HKOI_READVARS_INPUT = 'Read line into ';
+Blockly.Msg.HKOI_READVARS_VARS = 'variables:';
+Blockly.Msg.HKOI_DP_TO = 'rounded off to';
+Blockly.Msg.HKOI_DP_DECIMAL_PLACES = 'decimal places';
+Blockly.Msg.HKOI_BITWISE_AND = 'bitwise AND';
+Blockly.Msg.HKOI_BITWISE_OR = 'bitwise OR';
+Blockly.Msg.HKOI_BITWISE_XOR = 'bitwise XOR';
+Blockly.Msg.HKOI_BITWISE_NOT = 'Bitwise NOT';
+Blockly.Msg.HKOI_BITWISE_SHL = 'left shift by';
+Blockly.Msg.HKOI_BITWISE_SHR_SIGNED = 'signed right shift by';
+Blockly.Msg.HKOI_BITWISE_SHR_UNSIGNED = 'unsigned right shift by';
+Blockly.Msg.HKOI_READ_VARS_PROMPT = 'Input the value of the following variables, separated by spaces:'
