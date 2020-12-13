@@ -31,6 +31,7 @@ Blockly.JavaScript = new Blockly.Generator('JavaScript');
  * @private
  */
 Blockly.JavaScript.addReservedWords(
+    'HKOIInput,HKOIOutput,HKOIUpdateVar,HKOIEnterScope,HKOIExitScope' + // HKOI
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords
     'break,case,catch,class,const,continue,debugger,default,delete,do,else,export,extends,finally,for,function,if,import,in,instanceof,new,return,super,switch,this,throw,try,typeof,var,void,while,with,yield,' +
     'enum,' +
@@ -150,8 +151,7 @@ Blockly.JavaScript.init = function(workspace) {
   // Add user variables, but only ones that are being used.
   var variables = Blockly.Variables.allUsedVarModels(workspace);
   for (var i = 0; i < variables.length; i++) {
-    defvars.push(Blockly.JavaScript.variableDB_.getName(variables[i].getId(),
-        Blockly.VARIABLE_CATEGORY_NAME));
+    defvars.push();
   }
 
   // Declare all of the variables.
@@ -160,6 +160,8 @@ Blockly.JavaScript.init = function(workspace) {
         'var ' + defvars.join(', ') + ';';
   }
   this.isInitialized = true;
+  Blockly.JavaScript.definitions_['global'] =
+      'HKOIEnterScope(\'Global\', ' + JSON.stringify(defvars) + ');';
 };
 
 /**

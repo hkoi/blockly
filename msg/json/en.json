@@ -361,9 +361,11 @@
 	"LISTS_SORT_TYPE_IGNORECASE": "alphabetic, ignore case",
 	"LISTS_SPLIT_HELPURL": "https://github.com/google/blockly/wiki/Lists#splitting-strings-and-joining-lists",
 	"LISTS_SPLIT_LIST_FROM_TEXT": "make list from text",
+	"LISTS_SPLIT_NUMERIC_LIST_FROM_TEXT": "make list of numbers from text",
 	"LISTS_SPLIT_TEXT_FROM_LIST": "make text from list",
 	"LISTS_SPLIT_WITH_DELIMITER": "with delimiter",
 	"LISTS_SPLIT_TOOLTIP_SPLIT": "Split text into a list of texts, breaking at each delimiter.",
+	"LISTS_SPLIT_TOOLTIP_SPLIT_NUMERIC": "Split text into a list of texts, breaking at each delimiter.",
 	"LISTS_SPLIT_TOOLTIP_JOIN": "Join a list of texts into one text, separated by a delimiter.",
 	"LISTS_REVERSE_HELPURL": "https://github.com/google/blockly/wiki/Lists#reversing-a-list",
 	"LISTS_REVERSE_MESSAGE0": "reverse %1",
@@ -404,5 +406,14 @@
 	"PROCEDURES_IFRETURN_WARNING": "Warning: This block may be used only within a function definition.",
 	"WORKSPACE_COMMENT_DEFAULT_TEXT": "Say something...",
 	"WORKSPACE_ARIA_LABEL": "Blockly Workspace",
-	"COLLAPSED_WARNINGS_WARNING": "Collapsed blocks contain warnings."
+	"COLLAPSED_WARNINGS_WARNING": "Collapsed blocks contain warnings.",
+
+	"HKOI_READVARS_INPUT": "Read line into ",
+  "HKOI_BITWISE_AND": "bitwise AND",
+  "HKOI_BITWISE_OR": "bitwise OR",
+  "HKOI_BITWISE_XOR": "bitwise XOR",
+  "HKOI_BITWISE_NOT": "Bitwise NOT",
+  "HKOI_BITWISE_SHL": "left shift by",
+  "HKOI_BITWISE_SHR_SIGNED": "signed right shift by",
+  "HKOI_BITWISE_SHR_UNSIGNED": "unsigned right shift by"
 }

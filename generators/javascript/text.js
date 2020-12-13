@@ -86,6 +86,7 @@ Blockly.JavaScript['text_append'] = function(block) {
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
   var code = varName + ' += ' +
       Blockly.JavaScript.text.forceString_(value)[0] + ';\n';
+  code += 'HKOIUpdateVar(\'' + varName + '\', String(' + varName + '));\n';
   return code;
 };
 

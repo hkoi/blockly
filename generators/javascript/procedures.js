@@ -55,7 +55,12 @@ Blockly.JavaScript['procedures_defreturn'] = function(block) {
         Blockly.VARIABLE_CATEGORY_NAME);
   }
   var code = 'function ' + funcName + '(' + args.join(', ') + ') {\n' +
-      xfix1 + loopTrap + branch + xfix2 + returnValue + '}';
+      xfix1 + loopTrap + 
+      'HKOIEnterScope(\'' + funcName + '\', ' + JSON.stringify(args) + ');\n';
+  for (var x in args) {
+    code += 'HKOIUpdateVar(\'' + args[x] + '\', ' + args[x] + ')\n';
+  }
+  code += branch + '\nHKOIExitScope();\n' + xfix2 + returnValue + '}';
   code = Blockly.JavaScript.scrub_(block, code);
   // Add % so as not to collide with helper functions in definitions list.
   Blockly.JavaScript.definitions_['%' + funcName] = code;
@@ -104,9 +109,9 @@ Blockly.JavaScript['procedures_ifreturn'] = function(block) {
   if (block.hasReturnValue_) {
     var value = Blockly.JavaScript.valueToCode(block, 'VALUE',
         Blockly.JavaScript.ORDER_NONE) || 'null';
-    code += Blockly.JavaScript.INDENT + 'return ' + value + ';\n';
+    code += Blockly.JavaScript.INDENT + 'HKOIExitScope(); return ' + value + ';\n';
   } else {
-    code += Blockly.JavaScript.INDENT + 'return;\n';
+    code += Blockly.JavaScript.INDENT + 'HKOIExitScope(); return;\n';
   }
   code += '}\n';
   return code;

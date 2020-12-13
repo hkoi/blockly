@@ -27,6 +27,7 @@ module.exports = {
   buildCompressed: buildTasks.compressed,
   buildGenerators: buildTasks.generators,
   buildAdvancedCompilationTest: buildTasks.advancedCompilationTest,
+  wrap: buildTasks.wrap,
   gitSyncDevelop: gitTasks.syncDevelop,
   gitSyncMaster: gitTasks.syncMaster,
   gitCreateRC: gitTasks.createRC,

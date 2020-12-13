@@ -210,7 +210,7 @@ Blockly.JavaScript['math_change'] = function(block) {
   var varName = Blockly.JavaScript.variableDB_.getName(
       block.getFieldValue('VAR'), Blockly.VARIABLE_CATEGORY_NAME);
   return varName + ' = (typeof ' + varName + ' == \'number\' ? ' + varName +
-      ' : 0) + ' + argument0 + ';\n';
+      ' : 0) + ' + argument0 + ';\nHKOIUpdateVar(\'' + varName + '\', ' + varName + ');\n';
 };
 
 // Rounding functions have a single operand.

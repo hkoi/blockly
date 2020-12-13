@@ -180,6 +180,7 @@ Blockly.JavaScript['lists_setIndex'] = function(block) {
     list = listVar;
     return code;
   }
+  var codeFunc = function() {
   switch (where) {
     case ('FIRST'):
       if (mode == 'SET') {
@@ -234,6 +235,9 @@ Blockly.JavaScript['lists_setIndex'] = function(block) {
       break;
   }
   throw Error('Unhandled combination (lists_setIndex).');
+  } // codeFunc()
+  return codeFunc() + 'HKOIUpdateVar(\'' + list + '\', ' + list + ');\n';
+
 };
 
 /**
@@ -362,7 +366,7 @@ Blockly.JavaScript['lists_split'] = function(block) {
   var delimiter = Blockly.JavaScript.valueToCode(block, 'DELIM',
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
   var mode = block.getFieldValue('MODE');
-  if (mode == 'SPLIT') {
+  if (mode == 'SPLIT' || mode == 'SPLIT_NUMERIC') {
     if (!input) {
       input = '\'\'';
     }
@@ -375,7 +379,11 @@ Blockly.JavaScript['lists_split'] = function(block) {
   } else {
     throw Error('Unknown mode: ' + mode);
   }
-  var code = input + '.' + functionName + '(' + delimiter + ')';
+  var getCompareFunctionName = Blockly.JavaScript.provideFunction_(
+    'pFloat',
+    ['function ' + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ +
+     '  (x) { return parseFloat(x, 10); } ']);
+  var code = input + '.' + functionName + '(' + delimiter + ')' + (mode == 'SPLIT_NUMERIC' ? '.map(' + getCompareFunctionName + ')' : '');
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 

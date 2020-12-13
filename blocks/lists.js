@@ -787,6 +787,7 @@ Blockly.Blocks['lists_split'] = {
     var dropdown = new Blockly.FieldDropdown(
         [
           [Blockly.Msg['LISTS_SPLIT_LIST_FROM_TEXT'], 'SPLIT'],
+          [Blockly.Msg['LISTS_SPLIT_NUMERIC_LIST_FROM_TEXT'], 'SPLIT_NUMERIC'],
           [Blockly.Msg['LISTS_SPLIT_TEXT_FROM_LIST'], 'JOIN']
         ],
         function(newMode) {
@@ -806,6 +807,8 @@ Blockly.Blocks['lists_split'] = {
       var mode = thisBlock.getFieldValue('MODE');
       if (mode == 'SPLIT') {
         return Blockly.Msg['LISTS_SPLIT_TOOLTIP_SPLIT'];
+      } else if (mode == 'SPLIT_NUMERIC') {
+        return Blockly.Msg['LISTS_SPLIT_TOOLTIP_SPLIT_NUMERIC'];
       } else if (mode == 'JOIN') {
         return Blockly.Msg['LISTS_SPLIT_TOOLTIP_JOIN'];
       }
@@ -833,7 +836,7 @@ Blockly.Blocks['lists_split'] = {
         }
       }
     }
-    if (newMode == 'SPLIT') {
+    if (newMode == 'SPLIT' || newMode == 'SPLIT_NUMERIC') {
       this.outputConnection.setCheck('Array');
       this.getInput('INPUT').setCheck('String');
     } else {
