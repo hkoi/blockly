@@ -1,0 +1,36 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="hkoi_readvars" id="r,@%ysS]!kKcphFv.A`K" x="174" y="45">
+    <mutation numvars="2"></mutation>
+    <field name="numvars">2</field>
+    <field name="variable1">item1</field>
+    <field name="variable2">item2</field>
+    <next>
+      <block type="text_print" id="1lGy3GBcYujG-f|k!%[~">
+        <value name="TEXT">
+          <shadow type="text" id="obM4ik/v(ZqN!z%rqvZZ">
+            <field name="TEXT">abc</field>
+          </shadow>
+          <block type="math_arithmetic" id="OU(Y~(jm}KK7CR}CUbgJ">
+            <field name="OP">ADD</field>
+            <value name="A">
+              <shadow type="math_number" id="8hN!5G|w$N0GuVa~9DxK">
+                <field name="NUM">1</field>
+              </shadow>
+              <block type="variables_get" id="ffp*O54_bI,xua+wrHYy">
+                <field name="VAR">item1</field>
+              </block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="p)WDw4B`dW-Qk$zy`xP-">
+                <field name="NUM">1</field>
+              </shadow>
+              <block type="variables_get" id="uTkiLheV~.8JZ`Gk-obZ">
+                <field name="VAR">item2</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

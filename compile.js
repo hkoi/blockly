@@ -1,30 +1,21 @@
 #!/usr/bin/nodejs
-
 'use strict';
 
-global.DOMParser = require('xmldom').DOMParser; 
-//require('../closure-library/closure/goog/bootstrap/nodejs')
-global.Blockly = require('./blockly_wrapped.js');
-//require('./blocks_compressed.js');
-//require('./javascript_compressed.js');
-//require('./msg/js/en.js');
-
-Blockly.Events.Create = function() { this.isNull=function(){return 1}; };
+const Blockly = require('./dist/node.js');
 
 var fname = process.argv[0] == 'blockly' ? process.argv[1] : process.argv[2];
 var fs = require('fs');
 var xmlText = fs.readFileSync(fname, 'utf8');
-
 try {
-    var xml = Blockly.Xml.textToDom(xmlText);
+    var xml = Blockly.utils.xml.textToDomDocument(xmlText.replace("\r", ""));
 }
 catch (e) {
     console.log(e);
     process.exit(2);
 }
-
+global.document = xml;
 var workspace = new Blockly.Workspace();
-Blockly.Xml.domToWorkspace(xml, workspace);
+Blockly.Xml.domToWorkspace(xml.firstChild, workspace);
 workspace.options.oneBasedIndex = true;
 var code = Blockly.JavaScript.workspaceToCode(workspace);
 
