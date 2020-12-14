@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "Ellen Spertus <ellen.spertus@gmail.com>",
-		"lastupdated": "2020-12-13 23:53:13.416861",
+		"lastupdated": "2020-12-15 01:46:39.805803",
 		"locale": "en",
 		"messagedocumentation" : "qqq"
 	},
@@ -268,7 +268,7 @@
 	"TEXT_TRIM_OPERATOR_LEFT": "trim spaces from left side of",
 	"TEXT_TRIM_OPERATOR_RIGHT": "trim spaces from right side of",
 	"TEXT_PRINT_HELPURL": "https://github.com/google/blockly/wiki/Text#printing-text",
-	"TEXT_PRINT_TITLE": "print %1",
+	"TEXT_PRINT_TITLE": "print line %1",
 	"TEXT_PRINT_TOOLTIP": "Print the specified text, number or other value.",
 	"TEXT_PROMPT_HELPURL": "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user",
 	"TEXT_PROMPT_TYPE_TEXT": "prompt for text with message",
@@ -407,17 +407,19 @@
 	"WORKSPACE_COMMENT_DEFAULT_TEXT": "Say something...",
 	"WORKSPACE_ARIA_LABEL": "Blockly Workspace",
 	"COLLAPSED_WARNINGS_WARNING": "Collapsed blocks contain warnings.",
-	"HKOI_LINE_BREAK": "Line break",
-	"HKOI_READVARS_INPUT": "Read line into ",
+	"HKOI_LINE_BREAK": "line break",
+	"HKOI_READVARS_INPUT": "read line into ",
 	"HKOI_READVARS_VARS": "variables:",
 	"HKOI_DP_TO": "rounded off to",
 	"HKOI_DP_DECIMAL_PLACES": "decimal places",
 	"HKOI_BITWISE_AND": "bitwise AND",
 	"HKOI_BITWISE_OR": "bitwise OR",
 	"HKOI_BITWISE_XOR": "bitwise XOR",
-	"HKOI_BITWISE_NOT": "Bitwise NOT",
+	"HKOI_BITWISE_NOT": "bitwise NOT",
 	"HKOI_BITWISE_SHL": "left shift by",
 	"HKOI_BITWISE_SHR_SIGNED": "signed right shift by",
 	"HKOI_BITWISE_SHR_UNSIGNED": "unsigned right shift by",
-	"HKOI_READ_VARS_PROMPT": "Input the value of the following variables, separated by spaces:"
+	"HKOI_READ_VARS_PROMPT": "Input the value of the following variables, separated by spaces:",
+	"HKOI_RETURN": "terminate program",
+	"HKOI_RETURN_WARNING": "This block can only be used in the main program"
 }

@@ -1053,7 +1053,7 @@ Blockly.Msg.TEXT_PRINT_HELPURL = 'https://github.com/google/blockly/wiki/Text#pr
 /// [https://github.com/google/blockly/wiki/Text#printing-text
 /// https://github.com/google/blockly/wiki/Text#printing-text].
 /// \n\nParameters:\n* %1 - the value to print
-Blockly.Msg.TEXT_PRINT_TITLE = 'print %1';
+Blockly.Msg.TEXT_PRINT_TITLE = 'print line %1';
 /** @type {string} */
 /// tooltip - See [https://github.com/google/blockly/wiki/Text#printing-text
 /// https://github.com/google/blockly/wiki/Text#printing-text].
@@ -1631,16 +1631,18 @@ Blockly.Msg.WORKSPACE_ARIA_LABEL = 'Blockly Workspace';
 /// block they collapsed contains blocks that have warnings.
 Blockly.Msg.COLLAPSED_WARNINGS_WARNING = 'Collapsed blocks contain warnings.';
 
-Blockly.Msg.HKOI_LINE_BREAK = 'Line break';
-Blockly.Msg.HKOI_READVARS_INPUT = 'Read line into ';
+Blockly.Msg.HKOI_LINE_BREAK = 'line break';
+Blockly.Msg.HKOI_READVARS_INPUT = 'read line into ';
 Blockly.Msg.HKOI_READVARS_VARS = 'variables:';
 Blockly.Msg.HKOI_DP_TO = 'rounded off to';
 Blockly.Msg.HKOI_DP_DECIMAL_PLACES = 'decimal places';
 Blockly.Msg.HKOI_BITWISE_AND = 'bitwise AND';
 Blockly.Msg.HKOI_BITWISE_OR = 'bitwise OR';
 Blockly.Msg.HKOI_BITWISE_XOR = 'bitwise XOR';
-Blockly.Msg.HKOI_BITWISE_NOT = 'Bitwise NOT';
+Blockly.Msg.HKOI_BITWISE_NOT = 'bitwise NOT';
 Blockly.Msg.HKOI_BITWISE_SHL = 'left shift by';
 Blockly.Msg.HKOI_BITWISE_SHR_SIGNED = 'signed right shift by';
 Blockly.Msg.HKOI_BITWISE_SHR_UNSIGNED = 'unsigned right shift by';
-Blockly.Msg.HKOI_READ_VARS_PROMPT = 'Input the value of the following variables, separated by spaces:'
+Blockly.Msg.HKOI_READ_VARS_PROMPT = 'Input the value of the following variables, separated by spaces:';
+Blockly.Msg.HKOI_RETURN = 'terminate program';
+Blockly.Msg.HKOI_RETURN_WARNING = 'This block can only be used in the main program';

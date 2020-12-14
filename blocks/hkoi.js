@@ -163,3 +163,48 @@ Blockly.Blocks['hkoi_bitwise'] = {
     this.setOutput(true, 'Number');
   }
 };
+
+Blockly.Blocks['hkoi_return'] = {
+  /**
+   * Block for return.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setColour(0);
+    this.setPreviousStatement(true);
+    this.setNextStatement(false);
+    this.appendDummyInput().appendField(Blockly.Msg['HKOI_RETURN']);
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if this flow block is not nested inside a loop.
+   * @param {!Blockly.Events.Abstract} _e Change event.
+   * @this {Blockly.Block}
+   */
+  onchange: function(_e) {
+    if (!this.workspace.isDragging || this.workspace.isDragging()) {
+      return;  // Don't change state at the start of a drag.
+    }
+    var legal = true;
+    // Is the block nested in a procedure?
+    var block = this;
+    do {
+      if (['procedures_defnoreturn', 'procedures_defreturn'].indexOf(block.type) != -1) {
+        legal = false;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+      if (!this.isInFlyout) {
+        this.setEnabled(true);
+      }
+    } else {
+      this.setWarningText(Blockly.Msg['HKOI_RETURN_WARNING']);
+      if (!this.isInFlyout && !this.getInheritedDisabled()) {
+        this.setEnabled(false);
+      }
+    }
+  },
+};

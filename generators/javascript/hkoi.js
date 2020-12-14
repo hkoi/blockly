@@ -79,3 +79,7 @@ Blockly.JavaScript['hkoi_bitwise'] = function(block) {
   }
   return ['(parseInt(' + arg1 + ') ' + op + ' parseInt(' + arg2 + '))', Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
+
+Blockly.JavaScript['hkoi_return'] = function(block) {
+  return 'return;\n';
+};
