@@ -35,7 +35,9 @@ Blockly.JavaScript['hkoi_endl'] = function(block) {
 
 Blockly.JavaScript['hkoi_readvars'] = function(block) {
   var numvars = block.getFieldValue('numvars');
-  var temp = Blockly.JavaScript.variableDB_.getDistinctName('temp_list', Blockly.Variables.NAME_TYPE);
+  var temp_str = Blockly.JavaScript.variableDB_.getDistinctName('temp_str', Blockly.Variables.NAME_TYPE);
+  var temp_len = Blockly.JavaScript.variableDB_.getDistinctName('temp_len', Blockly.Variables.NAME_TYPE);
+  var temp_list = Blockly.JavaScript.variableDB_.getDistinctName('temp_list', Blockly.Variables.NAME_TYPE);
 
   var code = '';
   var varnames = [];
@@ -43,10 +45,16 @@ Blockly.JavaScript['hkoi_readvars'] = function(block) {
     var name = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('variable' + i), Blockly.Variables.NAME_TYPE);
     varnames.push(name);
     code += name +
-      ' = isNaN(parseFloat(' + temp + '[' + (i - 1) + '])) ? ' + temp + '[' + (i - 1) + '] : parseFloat(' + temp + '[' + (i - 1) + ']);\n';
+      ' = isNaN(parseFloat(' + temp_list + '[' + (i - 1) + '])) ? ' + temp_list + '[' + (i - 1) + '] : parseFloat(' + temp_list + '[' + (i - 1) + ']);\n';
     code += 'HKOIUpdateVar(\'' + name + '\', ' + name + ');\n';
   }
-  return 'var ' + temp + ' = window.prompt("' + Blockly.Msg.HKOI_READ_VARS_PROMPT + '\\n" + ' + JSON.stringify(varnames.join(' ')) + ').match(/(\\S+)/g);\n' + code;
+  var code2 = 'var ' + temp_str + ' = window.prompt("' + Blockly.Msg.HKOI_READ_VARS_PROMPT + '\\n" + ' + JSON.stringify(varnames.join(' ')) + ');\n'
+  code2 += temp_str + ' = ' + temp_str + '.replace(\'\\t\', \' \');\n';
+  code2 += 'do { var ' + temp_len + ' = ' + temp_str + '.length; \n';
+  code2 += temp_str + ' = ' + temp_str + '.replace(\'  \', \' \'); }\n';
+  code2 += 'while (' + temp_str + '.length != ' + temp_len + ');\n';
+  code2 += 'var ' + temp_list + ' = ' + temp_str + '.split(\' \');\n';
+  return code2 + code;
 };
 
 
